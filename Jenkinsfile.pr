@@ -1,0 +1,3 @@
+@Library('sharedPipelines@main') _
+
+servicePipeline()
