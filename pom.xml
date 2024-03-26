@@ -5,7 +5,7 @@
 
 	<groupId>com.g4share.pipeline-demo</groupId>
 	<artifactId>user-service</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 	<packaging>jar</packaging>
 
 	<name>User Service</name>
@@ -73,12 +73,11 @@
 
 	<profiles>
 		<profile>
-			<id>dev</id>
+			<id>dev-env</id>
 			<properties>
 				<jdbc.url>jdbc:postgresql://rpi5.local:5432/pipeline_demo</jdbc.url>
 				<jdbc.username>postgres</jdbc.username>
 				<jdbc.password>S3cret</jdbc.password>
-				<jdbc.schema>user_service</jdbc.schema>
 				<server.port>8081</server.port>
 				<service.schema>user_service</service.schema>
 			</properties>

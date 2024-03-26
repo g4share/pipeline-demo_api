@@ -1,0 +1,13 @@
+{
+  "name": "user-service",
+  "profile": "ci-env",
+  "tests": [
+    {
+      "name": "unit",
+      "profile": "ci-env",
+      "dependencies": [
+        "user-db@V0.0.1"
+      ]
+    }
+  ]
+}
