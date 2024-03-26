@@ -5,7 +5,7 @@
 
 	<groupId>com.g4share.pipeline-demo</groupId>
 	<artifactId>user-service</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 
 	<name>User Service</name>
@@ -94,3 +94,4 @@
 		</resources>
 	</build>
 </project>
+
