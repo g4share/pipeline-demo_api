@@ -5,7 +5,7 @@
 
 	<groupId>com.g4share.pipeline-demo</groupId>
 	<artifactId>user-service</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 	<packaging>jar</packaging>
 
 	<name>User Service</name>
@@ -20,6 +20,9 @@
 		<lombok.version>1.18.30</lombok.version>
 		<postgres.version>42.7.3</postgres.version>
 		<junit.version>5.10.2</junit.version>
+		<assertj.version>3.25.3</assertj.version>
+		<failsafe.vesrion>3.2.5</failsafe.vesrion>
+		<helper_maven.vesrion>3.5.0</helper_maven.vesrion>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
@@ -56,6 +59,12 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -73,12 +82,11 @@
 
 	<profiles>
 		<profile>
-			<id>dev</id>
+			<id>dev-env</id>
 			<properties>
 				<jdbc.url>jdbc:postgresql://rpi5.local:5432/pipeline_demo</jdbc.url>
 				<jdbc.username>postgres</jdbc.username>
 				<jdbc.password>S3cret</jdbc.password>
-				<jdbc.schema>user_service</jdbc.schema>
 				<server.port>8081</server.port>
 				<service.schema>user_service</service.schema>
 			</properties>
@@ -92,5 +100,46 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${helper_maven.vesrion}</version>
+				<executions>
+					<execution>
+						<id>add-integration-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/integration-test/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${failsafe.vesrion}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<testSourceDirectory>src/integration-test/java</testSourceDirectory>
+							<includes>
+								<include>**/*IT.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>

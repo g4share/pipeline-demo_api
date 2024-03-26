@@ -1,14 +1,18 @@
 spring:
   datasource:
-    url: @jdbc.url@
-    username: @jdbc.username@
-    password: @jdbc.password@
+    url: '@jdbc.url@'
+    username: '@jdbc.username@'
+    password: '@jdbc.password@'
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: @service.schema@
+        default_schema: '@service.schema@'
 server:
-  port: @server.port@
+  port: '@server.port@'
   servlet:
     context-path: /user/api/v1
+
+
+  jpa:
+    properties.hibernate.default_schema: '@service.schema@'

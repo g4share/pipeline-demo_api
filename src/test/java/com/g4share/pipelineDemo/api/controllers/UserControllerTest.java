@@ -29,7 +29,7 @@ public class UserControllerTest {
     private UserService userService;
 
     @Test
-    public void getAllUsers_ShouldReturnUsers() throws Exception {
+    public void getAllUsers() throws Exception {
         User user1 = new User();
         User user2 = new User();
         List<User> users = Arrays.asList(user1, user2);
@@ -39,5 +39,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$", hasSize(2)));
+
+        System.out.println("------------ UT A");
     }
 }
